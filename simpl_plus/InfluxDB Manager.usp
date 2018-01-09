@@ -1,0 +1,75 @@
+/*
+Programmer: Ryan French
+*/
+
+#SYMBOL_NAME "CrestronInfluxDB v1.0"
+#DEFAULT_VOLATILE
+#ENABLE_STACK_CHECKING
+#ENABLE_TRACE
+#PRINT_TO_TRACE
+#includepath "C:\\Users\\kba\\Documents\\_Prog\\InfluxDB\\CrestronInfluxDB\\CrestronInfluxDB\\bin"
+#USER_SIMPLSHARP_LIBRARY "CrestronInfluxDB"
+
+//=====// I/O //=====//
+
+DIGITAL_INPUT _SKIP_,
+			  _SKIP_,
+			  _SKIP_,
+			  _SKIP_;
+
+STRING_INPUT _SKIP_, _SKIP_, _SKIP_, PostContent[255];
+
+ANALOG_INPUT Measurementx10[10];
+
+DIGITAL_OUTPUT _SKIP_,
+			   _SKIP_;
+
+STRING_OUTPUT _SKIP_, _SKIP_, _SKIP_, _SKIP_, _SKIP_, CommandStatus;
+ 
+STRING_PARAMETER IP_Address[15],Db_Name[32];
+
+INTEGER_PARAMETER Port;
+
+STRING_PARAMETER _SKIP_, MeasurementGroup1[32], TagKey[32];
+
+//=====// VARIABLES //=====//
+
+//=====// FUNCTIONS //=====//
+
+//=====// EVENTS //=====//
+
+CHANGE PostContent
+{
+	HttpAPI.InfluxDBPost(PostContent);
+}
+
+CHANGE Measurementx10
+{
+	string PostDatas[255];
+	integer idx;
+                          
+	idx = getlastmodifiedarrayindex();
+	makestring(PostDatas, "%s,%s=%d value=%d.%d", MeasurementGroup1, TagKey, idx, Measurementx10[idx]/10, (Measurementx10[idx] MOD 10));
+
+	HttpAPI.InfluxDBPost(PostDatas);
+}
+
+//=====// CALLBACKS //=====//
+
+CALLBACK FUNCTION CommandStatusHandler(STRING _status) {
+
+	CommandStatus = _status;
+
+}
+
+//=====// MAIN //=====//
+
+FUNCTION Main () {
+
+	WAITFORINITIALIZATIONCOMPLETE();
+
+	RegisterDelegate(HttpAPI, CommandStatus, CommandStatusHandler);
+                                  
+	HttpAPI.TCPClientSettings(IP_Address, Port, Db_Name);
+   
+}

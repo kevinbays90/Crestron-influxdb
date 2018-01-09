@@ -1,0 +1,7 @@
+C:\Users\kba\Documents\_Prog\InfluxDB\CrestronInfluxDB\CrestronInfluxDB\bin\CrestronInfluxDB.dll
+C:\Users\kba\Documents\_Prog\InfluxDB\CrestronInfluxDB\CrestronInfluxDB\bin\CrestronInfluxDB.pdb
+C:\Users\kba\Documents\_Prog\InfluxDB\CrestronInfluxDB\CrestronInfluxDB\bin\SimplSharpCustomAttributesInterface.dll
+C:\Users\kba\Documents\_Prog\InfluxDB\CrestronInfluxDB\CrestronInfluxDB\bin\SimplSharpHelperInterface.dll
+C:\Users\kba\Documents\_Prog\InfluxDB\CrestronInfluxDB\CrestronInfluxDB\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\kba\Documents\_Prog\InfluxDB\CrestronInfluxDB\CrestronInfluxDB\obj\Debug\CrestronInfluxDB.dll
+C:\Users\kba\Documents\_Prog\InfluxDB\CrestronInfluxDB\CrestronInfluxDB\obj\Debug\CrestronInfluxDB.pdb
